@@ -14,6 +14,8 @@ Below are the main resources represented in the project:
 
 ![erd](https://github.com/elianaellati/Inventory_Managment/assets/132192886/b3a0fceb-d091-4c46-80c7-5de3a9acbf48)
 
+[Untitled document (8).docx](https://github.com/elianaellati/Inventory_Managment/files/14885801/Untitled.document.8.docx)
+
 
 
 
