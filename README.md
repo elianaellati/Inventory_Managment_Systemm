@@ -25,6 +25,9 @@ From the previous description we can conduct the relations between the four reso
 -The order contains several items and many items could appear in several orders , so we conduct the relation as the following (Many To Many).
 -The Supplier can supply several items and the supplied item will be conduct to one supplier.(One To Many).
 
+Run Application :
+To run the application, first ensure it's built successfully using Maven or Gradle. Once built, execute the application JAR file using the java -jar command followed by the JAR file's path.Look for any startup errors or messages in the console logs. Access the application via a web browser or API client such as Postman at http://localhost:8080 by default. Interact with the application based on its functionality, such as sending HTTP requests to exposed endpoints for a REST API.
+
 The design and documentation for each resource:
 Customer Resource:
 [Customer.docx](https://github.com/elianaellati/Inventory_Managment_Systemm/files/14893196/Customer.docx)
