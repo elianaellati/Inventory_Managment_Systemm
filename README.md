@@ -1,8 +1,10 @@
 Inventory Managment System
+
 An organization can manage inventory-related duties more effectively by using an inventory management system, which is a complete software solution. The system's powerful features and user-friendly interface enable users to effectively track, monitor, and control a range of inventory management issues, such as:
 -Order Management.
 -Customer Management.
 -Supplier Management.
+
 Below are the main resources represented in the project:
 1-Supplier: Represents the suppliers who provide items to the inventory system.
 2-Item: Represents the items available in the inventory system, provided by suppliers.
@@ -26,12 +28,13 @@ From the previous description we can conduct the relations between the four reso
 
 The design and documentation for each resource:
 Customer Resource:
-
+[Customer.docx](https://github.com/elianaellati/Inventory_Managment_Systemm/files/14893196/Customer.docx)
 Order Resource:
-
+[Order.docx](https://github.com/elianaellati/Inventory_Managment_Systemm/files/14893226/Order.docx)
 Item Resource:
-
+[Item.docx](https://github.com/elianaellati/Inventory_Managment_Systemm/files/14893234/Item.docx)
 Supplier Resource
+[Supplier.docx](https://github.com/elianaellati/Inventory_Managment_Systemm/files/14893238/Supplier.docx)
 
 OpenAPI Specififcation:
 https://app.swaggerhub.com/apis/ELIANAELLATI2002_1/Inventory_Management/1.0.0#/
