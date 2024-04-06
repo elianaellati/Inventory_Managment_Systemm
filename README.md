@@ -4,7 +4,7 @@ An organization can manage inventory-related duties more effectively by using an
 -Order Management.
 -Customer Management.
 -Supplier Management.
-
+-product(Item) Management.
 Below are the main resources represented in the project:
 1-Supplier: Represents the suppliers who provide items to the inventory system.
 2-Item: Represents the items available in the inventory system, provided by suppliers.
