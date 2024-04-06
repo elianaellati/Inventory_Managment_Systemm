@@ -33,13 +33,9 @@ Item Resource:
 
 Supplier Resource
 
+OpenAPI Specififcation:
+https://app.swaggerhub.com/apis/ELIANAELLATI2002_1/Inventory_Management/1.0.0#/
 
-
-
-
-
-
-[Untitled document (8).docx](https://github.com/elianaellati/Inventory_Managment/files/14885801/Untitled.document.8.docx)
 
 
  
