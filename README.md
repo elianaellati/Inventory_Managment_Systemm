@@ -11,7 +11,7 @@ Below are the main resources represented in the project:
 4-Customer: Represents the customers who place orders for items.
 
 The ER Daigram :
-![inventory_ERD](https://github.com/elianaellati/Inventory_Managment/assets/132192886/5731447d-7106-46dc-952a-2398eb434060)
+![image](https://github.com/elianaellati/Inventory_Managment_Systemm/assets/132192886/6c1fe8fe-d262-4f7d-863f-e6f259fe4c32)
 
 Description:
 This project aims to develop an Inventory Management System that allows tracking suppliers, items, orders, and customers within the system.
