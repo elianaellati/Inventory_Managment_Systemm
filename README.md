@@ -1,5 +1,4 @@
 Inventory Managment System
-
 An organization can manage inventory-related duties more effectively by using an inventory management system, which is a complete software solution. The system's powerful features and user-friendly interface enable users to effectively track, monitor, and control a range of inventory management issues, such as:
 -Order Management.
 -Customer Management.
