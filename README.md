@@ -5,17 +5,21 @@ An organization can manage inventory-related duties more effectively by using an
 -Customer Management.
 -Supplier Management.
 -product(Item) Management.
-## Below are the main resources represented in the project:
-1-Supplier: Represents the suppliers who provide items to the inventory system.#
+# Below are the main resources represented in the project:
+1-Supplier: Represents the suppliers who provide items to the inventory system.  
+#
 2-Item: Represents the items available in the inventory system, provided by suppliers.
+#
 3-Order: Represents the orders made by customers for purchasing items.
+#
 4-Customer: Represents the customers who place orders for items.
 
-The ER Daigram :
+# The ER Daigram :
 ![image](https://github.com/elianaellati/Inventory_Managment_Systemm/assets/132192886/6c1fe8fe-d262-4f7d-863f-e6f259fe4c32)
 
-Description:
+# Description:
 This project aims to develop an Inventory Management System that allows tracking suppliers, items, orders, and customers within the system.
+#
 -Customer: Stores information about customers, including their ID, name, phone number,email,and orders. Each customer may have multiple orders.
 -Order: Represents a purchase order made by a customer. Contains details such as order ID, date, customer ID, total price,status of the order,and list of items the customer want to purchase.
 -Item: Represents individual products in the inventory. Contains attributes such as item ID, name, quantity available, price,supplier Id which supply this item and list of orders. Each item may be associated with one or more orders.
