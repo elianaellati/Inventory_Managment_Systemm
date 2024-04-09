@@ -5,30 +5,30 @@ import lombok.*;
 
 import java.util.List;
 
-@Entity
-@Setter
 @Getter
+@Setter
+@Entity
 @Builder
+@Table(name="suppliers")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="customers")
-public class Customer {
+public class Supplier {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
-    private long id;
+    private Long id;
 
     @Column(name="name")
     private String name;
 
-    @Column(name="email")
-    private String email;
+    @Column(name="address")
+    private String address;
 
     @Column(name="phone_number")
     private String phone_number;
 
-    @OneToMany(mappedBy = "customer_id", cascade = {CascadeType.ALL})
-    private List <Order> orderlist;
+    @OneToMany(mappedBy = "supplier_id",cascade ={CascadeType.ALL})
+    private List<Item> itemlist;
 
 }
