@@ -25,7 +25,7 @@ public class OrderDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date order_date;
 
-    @NotNull
+
     private double total_price;
     @Enumerated
     @NotNull

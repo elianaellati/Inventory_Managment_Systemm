@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Builder
 @Getter
@@ -31,4 +33,8 @@ public class Item {
     @JoinColumn(name="supplier_id")
     @JsonBackReference
     private Supplier supplier_id;
+
+    @OneToMany(mappedBy = "item_id", cascade = {CascadeType.ALL})
+    private List<Order_item> order_items;
+
 }

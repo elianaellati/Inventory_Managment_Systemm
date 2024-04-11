@@ -61,7 +61,7 @@ public class SupplierService {
        Item itemToAdd=ItemMapper.toEntity(item,supplierById);
        supplierById.getItemlist().add(itemToAdd);
        supplierRepository.save(supplierById);
-       return ResponseEntity.ok(supplierById);
+       return ResponseEntity.ok(itemToAdd);
    }
    public List<ItemDto> retriveItemsForSupplier(Long id){
         Supplier supplierById=supplierRepository.findAllById(id);

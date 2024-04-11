@@ -24,7 +24,7 @@ public class CustomerController {
         return customerService.retrieveCustomers();
     }
     @PostMapping("")
-    public ResponseEntity<?> addCustomer(@RequestBody Customer customer){
+    public CustomerDto addCustomer(@RequestBody CustomerDto customer){
         return customerService.saveNewCustomer(customer);
     }
     @GetMapping("/{id}")
@@ -36,11 +36,11 @@ public class CustomerController {
         return customerService.deleteCustomerById(id);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCustomer(@PathVariable Long id,@RequestBody Customer updatedCustomer){
+    public CustomerDto updateCustomer(@PathVariable Long id,@RequestBody Customer updatedCustomer){
         return customerService.updateCustomerById(id,updatedCustomer);
     }
     @PostMapping("/{id}/orders")
-    public ResponseEntity<?> addOrderForSpecificCustomer(@PathVariable Long id, @RequestBody OrderDto orderRequest){
+    public OrderDto addOrderForSpecificCustomer(@PathVariable Long id, @RequestBody OrderDto orderRequest){
         return customerService.addOrderForSpecificCustomer(id,orderRequest);
     }
     @GetMapping("/{id}/orders")

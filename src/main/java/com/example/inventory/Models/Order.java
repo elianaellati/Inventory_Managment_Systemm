@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,6 +35,9 @@ public class Order {
     @JsonBackReference
     @JoinColumn(name="customer_id")
     private Customer customer_id;
+
+    @OneToMany(mappedBy = "order_id", cascade = {CascadeType.ALL})
+    private List<Order_item> order_items;
 
 }
 

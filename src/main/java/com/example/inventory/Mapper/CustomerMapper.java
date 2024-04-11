@@ -15,5 +15,12 @@ public class CustomerMapper{
         customer.setPhone_number(customerRequest.getPhone_number());
         return customer;
     }
+    public static Customer ToEntity(CustomerDto customerRequest){
+      return Customer.builder().name(customerRequest.getName())
+                .email(customerRequest.getEmail()).
+              phone_number(customerRequest.getPhone_number())
+              .build();
+
+    }
 
 }
