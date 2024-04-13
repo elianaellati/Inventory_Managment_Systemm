@@ -24,11 +24,12 @@ public class SupplierController {
        return supplierService.retrieveSuppliers();
     }
     @PostMapping("")
-    public ResponseEntity<?> addNewSupplier(@RequestBody SupplierDto supplierRequest){
+    public SupplierDto addNewSupplier(@RequestBody SupplierDto supplierRequest){
         return supplierService.addNewSuppliers(supplierRequest);
     }
     @GetMapping("/{id}")
     public SupplierDto retrieveSupplierById(@PathVariable Long id){
+
         return supplierService.retrieveSupplierById(id);
     }
     @DeleteMapping("/{id}")
@@ -36,7 +37,7 @@ public class SupplierController {
         return supplierService.deleteAnSupplier(id);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?>updateSupplier(@RequestBody SupplierDto supplier, @PathVariable Long id){
+    public SupplierDto updateSupplier(@RequestBody SupplierDto supplier, @PathVariable Long id){
         return supplierService.updateSupplier(supplier,id);
     }
     @GetMapping("/{id}/items")
@@ -44,7 +45,7 @@ public class SupplierController {
         return supplierService.retriveItemsForSupplier(id);
     }
     @PostMapping("/{id}/items")
-    public ResponseEntity<?>saveItemForSupplier(@RequestBody ItemDto item, @PathVariable Long id){
+    public ResponseEntity<?> saveItemForSupplier(@RequestBody ItemDto item, @PathVariable Long id){
         return supplierService.saveItemsForSupplier(item,id);
     }
 
