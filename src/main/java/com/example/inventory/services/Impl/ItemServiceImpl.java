@@ -3,10 +3,14 @@ package com.example.inventory.services.Impl;
 
 
 import com.example.inventory.DTO.ItemDto;
+import com.example.inventory.DTO.OrderDto;
 import com.example.inventory.DTO.SupplierDto;
 import com.example.inventory.Mapper.ItemMapper;
+import com.example.inventory.Mapper.Order_itemMapper;
 import com.example.inventory.Mapper.SupplierMapper;
 import com.example.inventory.Models.Item;
+import com.example.inventory.Models.Order;
+import com.example.inventory.Models.Order_item;
 import com.example.inventory.Models.Supplier;
 import com.example.inventory.Repository.ItemRepository;
 import com.example.inventory.services.ItemService;
@@ -38,6 +42,16 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.deleteById(id);
         return ResponseEntity.ok("Successfully deleted");
     }
-
+    public List<OrderDto>  retrieveOrdersForItem(Long id){
+        Item itemByid  = itemRepository.findAllById(id);
+        List<Order_item> orderForAnItem=itemByid.getOrder_items();
+        return orderForAnItem.stream().map(order -> Order_itemMapper.mapToDTOOrder(order)).collect(Collectors.toList());
+    }
+    public ItemDto updateItem(Long id,ItemDto request){
+        Item itemByid  = itemRepository.findAllById(id);
+        ItemMapper.update(itemByid,request);
+        itemRepository.save(itemByid);
+        return ItemMapper.mapToDTO(itemByid );
+    }
 
 }

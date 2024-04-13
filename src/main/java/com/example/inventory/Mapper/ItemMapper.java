@@ -22,9 +22,9 @@ public class ItemMapper {
                 .supplier_id(supplier)
                 .build();
     }
-    public static void update (Supplier oldSupplier,SupplierDto supplier) {
-        oldSupplier.setName(supplier.getName());
-        oldSupplier.setAddress(supplier.getAddress());
-        oldSupplier.setPhone_number(supplier.getPhone_number());
+    public static void update (Item oldItem ,ItemDto item) {
+        oldItem.setItem_name(item.getItem_name());
+        oldItem.setQuantity(item.getQuantity());
+        oldItem.setPrice(item.getPrice());
     }
 }

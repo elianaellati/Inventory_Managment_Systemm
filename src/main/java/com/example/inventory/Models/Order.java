@@ -39,5 +39,6 @@ public class Order {
     @OneToMany(mappedBy = "order_id", cascade = {CascadeType.ALL})
     private List<Order_item> order_items;
 
+
 }
 

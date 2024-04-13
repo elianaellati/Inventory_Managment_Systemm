@@ -50,7 +50,6 @@ public class SupplierServiceImpl implements SupplierService {
         if(supplierToUpdate!=null){
             SupplierMapper.update(supplierToUpdate,supplier);
             supplierRepository.save(supplierToUpdate);
-
         }
         return SupplierMapper.mapToDTO(supplierToUpdate);
     }

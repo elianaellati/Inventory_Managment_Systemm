@@ -1,6 +1,7 @@
 package com.example.inventory.Mapper;
 
 import com.example.inventory.DTO.ItemDto;
+import com.example.inventory.DTO.OrderDto;
 import com.example.inventory.DTO.Order_itemDto;
 import com.example.inventory.Models.Item;
 import com.example.inventory.Models.Order;
@@ -24,5 +25,13 @@ public class Order_itemMapper {
         item.setPrice(request.getItem_id().getPrice());
         item.setQuantity(request.getQuantity());
         return item;
+    }
+    public static OrderDto mapToDTOOrder(Order_item request){
+        OrderDto order=new OrderDto();
+        order.setId(request.getId());
+        order.setOrder_date(request.getOrder_id().getOrder_date());
+        order.setStatus(request.getOrder_id().getStatus());
+        order.setTotal_price(request.getOrder_id().getTotal_price());
+        return order;
     }
 }

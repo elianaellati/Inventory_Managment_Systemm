@@ -30,5 +30,4 @@ public class Supplier {
 
     @OneToMany(mappedBy = "supplier_id",cascade ={CascadeType.ALL})
     private List<Item> itemlist;
-
 }

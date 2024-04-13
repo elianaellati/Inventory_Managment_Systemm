@@ -1,6 +1,7 @@
 package com.example.inventory.Controller;
 
 import com.example.inventory.DTO.ItemDto;
+import com.example.inventory.DTO.OrderDto;
 import com.example.inventory.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,11 @@ import java.util.List;
 @RequestMapping("/items")
 public class ItemController {
  ItemService itemservice;
- @Autowired
+    @Autowired
    public ItemController( ItemService itemservice){
      this.itemservice=itemservice;
  }
- @GetMapping("")
+    @GetMapping("")
     public List<ItemDto>retrieveItems(){
      return itemservice.retrieveItems();
  }
@@ -29,4 +30,13 @@ public class ItemController {
     public ResponseEntity<?> deleteAnItem(@PathVariable Long id){
         return itemservice.deleteAnItem(id);
     }
+    @PutMapping("/{id}")
+    public ItemDto updateItem(@PathVariable Long id,@RequestBody ItemDto request){
+        return itemservice.updateItem(id,request);
+    }
+    @GetMapping("/{id}/orders")
+    public List<OrderDto>retrieveOrdersForItem(@PathVariable Long id ,@RequestBody ItemDto request){
+        return itemservice.retrieveOrdersForItem(id);
+    }
+
 }
