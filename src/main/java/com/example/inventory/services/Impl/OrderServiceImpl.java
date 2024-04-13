@@ -55,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
     public ResponseEntity<?> addItemsForOrder(Order_itemDto itemRequest){
         Order orderbyid=orderRepository.findById(itemRequest.getOrder_id()).orElseThrow(() -> new ResourceNotFound(itemRequest.getOrder_id()));
         Item itembyid=itemRepository.findById(itemRequest.getItem_id()).orElseThrow(() -> new ResourceNotFound(itemRequest.getItem_id()));
+        itembyid=checkQuantity(itemRequest,itembyid);
         Order_item itemstoadd=Order_itemMapper.toEntity(itembyid,orderbyid,itemRequest);
         order_itemRepository.save(itemstoadd);
         orderbyid.getOrder_items().add(itemstoadd);
@@ -64,15 +65,7 @@ public class OrderServiceImpl implements OrderService {
         itemRepository.save(itembyid);
         return ResponseEntity.ok("Successful");
     }
-    public static Order calculeTotalPrice(Order orderRequest){
-        List<Order_item> allItems=orderRequest.getOrder_items();
-        double totalprice=0;
-        for(int i=0;i<allItems.size();++i){
-            totalprice=totalprice+allItems.get(i).getItem_id().getPrice()*allItems.get(i).getQuantity();
-        }
-        orderRequest.setTotal_price(totalprice);
-        return orderRequest;
-    }
+
     public List<ItemDto> retrieveItemsBySpecificOrder(Long id){
         Order orderbyid=orderRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
         List<Order_item> itemsForAnOrder=orderbyid.getOrder_items();
@@ -87,6 +80,23 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDto>retrieveOrdersBySpecificStatus(OrderStatus status){
           List<Order>orders=orderRepository.findOrderByStatus(status);
         return orders.stream().map(order -> OrderMapper.mapToDTO(order)).collect(Collectors.toList());
+    }
+
+    public static Order calculeTotalPrice(Order orderRequest){
+        List<Order_item> allItems=orderRequest.getOrder_items();
+        double totalprice=0;
+        for(int i=0;i<allItems.size();++i){
+            totalprice=totalprice+allItems.get(i).getItem_id().getPrice()*allItems.get(i).getQuantity();
+        }
+        orderRequest.setTotal_price(totalprice);
+        return orderRequest;
+    }
+    public Item checkQuantity(Order_itemDto itemRequest,Item item){
+        if(itemRequest.getQuantity()<=item.getQuantity()){
+            System.out.print("quantityyyy"+(item.getQuantity()-itemRequest.getQuantity()));
+           item.setQuantity(item.getQuantity()-itemRequest.getQuantity());
+        }
+       return item;
     }
 
 }
