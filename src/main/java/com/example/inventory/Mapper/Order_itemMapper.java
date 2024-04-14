@@ -20,7 +20,7 @@ public class Order_itemMapper {
 
     public static ItemDto mapToDTO(Order_item request){
         ItemDto item=new ItemDto();
-        item.setId(request.getId());
+        item.setId(request.getItem_id().getId());
         item.setItem_name(request.getItem_id().getItem_name());
         item.setPrice(request.getItem_id().getPrice());
         item.setQuantity(request.getQuantity());
@@ -28,7 +28,7 @@ public class Order_itemMapper {
     }
     public static OrderDto mapToDTOOrder(Order_item request){
         OrderDto order=new OrderDto();
-        order.setId(request.getId());
+        order.setId(request.getOrder_id().getId());
         order.setOrder_date(request.getOrder_id().getOrder_date());
         order.setStatus(request.getOrder_id().getStatus());
         order.setTotal_price(request.getOrder_id().getTotal_price());

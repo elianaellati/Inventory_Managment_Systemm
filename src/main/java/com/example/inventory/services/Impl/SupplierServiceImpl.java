@@ -2,6 +2,7 @@ package com.example.inventory.services.Impl;
 
 import com.example.inventory.DTO.ItemDto;
 import com.example.inventory.DTO.SupplierDto;
+import com.example.inventory.Exceptions.ResourceNotFound;
 import com.example.inventory.Mapper.ItemMapper;
 import com.example.inventory.Mapper.SupplierMapper;
 import com.example.inventory.Models.Item;
@@ -38,7 +39,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     }
     public SupplierDto retrieveSupplierById(long id) {
-        Supplier supplierByid  = supplierRepository.findAllById(id);
+        Supplier supplierByid  = supplierRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
         return SupplierMapper.mapToDTO(supplierByid);
     }
     public ResponseEntity<?> deleteAnSupplier(long id) {
@@ -46,7 +47,7 @@ public class SupplierServiceImpl implements SupplierService {
         return ResponseEntity.ok("Successfully deleted");
     }
     public SupplierDto updateSupplier(SupplierDto supplier,long id) {
-        Supplier supplierToUpdate=supplierRepository.findAllById(id);
+        Supplier supplierToUpdate=supplierRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
         if(supplierToUpdate!=null){
             SupplierMapper.update(supplierToUpdate,supplier);
             supplierRepository.save(supplierToUpdate);
@@ -61,7 +62,7 @@ public class SupplierServiceImpl implements SupplierService {
         return ResponseEntity.ok("Saved Successfully");
     }
     public List<ItemDto> retriveItemsForSupplier(Long id){
-        Supplier supplierById=supplierRepository.findAllById(id);
+        Supplier supplierById=supplierRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
         List<Item>itemList=supplierById.getItemlist();
         return itemList.stream().map(item -> ItemMapper.mapToDTO(item)).collect(Collectors.toList());
     }

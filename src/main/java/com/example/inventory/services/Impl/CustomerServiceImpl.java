@@ -3,6 +3,7 @@ package com.example.inventory.services.Impl;
 
 import com.example.inventory.DTO.CustomerDto;
 import com.example.inventory.DTO.OrderDto;
+import com.example.inventory.Exceptions.ResourceNotFound;
 import com.example.inventory.Mapper.CustomerMapper;
 import com.example.inventory.Mapper.OrderMapper;
 import com.example.inventory.Models.Customer;
@@ -39,34 +40,30 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public CustomerDto findCustomerById(long id) {
-        Customer customerById = customerRepository.findAllById(id);
+        Customer customerById = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
         return CustomerMapper.mapToDTO(customerById);
     }
     public ResponseEntity<?> deleteCustomerById(long id) {
-        customerRepository.deleteById(id);
+        Customer customerById = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
+        customerRepository.delete(customerById);
         return ResponseEntity.ok("Successfully deleted");
     }
-    public CustomerDto updateCustomerById(long id,Customer requestedCustomer) {
-        Customer customerById = customerRepository.findAllById(id);
-        if(customerById!=null){
-            customerById.setName(requestedCustomer.getName());
-            customerById.setEmail(requestedCustomer.getEmail());
-            customerById.setPhone_number(requestedCustomer.getPhone_number());
-            customerRepository.save(customerById);
-        }
+    public CustomerDto updateCustomerById(long id,CustomerDto requestedCustomer) {
+        Customer customerById = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
+        CustomerMapper.update(customerById,requestedCustomer);
+        customerRepository.save(customerById);
         return CustomerMapper.mapToDTO(customerById);
     }
 
     public OrderDto addOrderForSpecificCustomer(Long id,OrderDto orderRequest) {
-        Customer customerById = customerRepository.findAllById(id);
-
+        Customer customerById = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
             Order orderToAdd= OrderMapper.toEntity(orderRequest,customerById);
             customerById.getOrderlist().add(orderToAdd);
             customerRepository.save(customerById);
         return OrderMapper.mapToDTO(orderToAdd);
     }
     public List<OrderDto> retrieveOrderForSpecificCustomer(Long id) {
-        Customer customerById = customerRepository.findAllById(id);
+        Customer customerById = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
         List<Order>orders=customerById.getOrderlist();
         return orders.stream().map(order -> OrderMapper.mapToDTO(order)).collect(Collectors.toList());
 

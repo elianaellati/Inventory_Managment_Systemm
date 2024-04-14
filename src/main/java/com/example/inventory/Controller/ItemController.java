@@ -35,7 +35,7 @@ public class ItemController {
         return itemservice.updateItem(id,request);
     }
     @GetMapping("/{id}/orders")
-    public List<OrderDto>retrieveOrdersForItem(@PathVariable Long id ,@RequestBody ItemDto request){
+    public List<OrderDto>retrieveOrdersForItem(@PathVariable Long id ){
         return itemservice.retrieveOrdersForItem(id);
     }
 

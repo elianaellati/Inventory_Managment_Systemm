@@ -1,7 +1,9 @@
 package com.example.inventory.Mapper;
 
 import com.example.inventory.DTO.CustomerDto;
+import com.example.inventory.DTO.ItemDto;
 import com.example.inventory.Models.Customer;
+import com.example.inventory.Models.Item;
 
 import java.util.List;
 
@@ -20,6 +22,12 @@ public class CustomerMapper{
                 .email(customerRequest.getEmail()).
               phone_number(customerRequest.getPhone_number())
               .build();
+
+    }
+    public static void update (Customer customerById , CustomerDto requestedCustomer) {
+        customerById.setName(requestedCustomer.getName());
+        customerById.setEmail(requestedCustomer.getEmail());
+        customerById.setPhone_number(requestedCustomer.getPhone_number());
 
     }
 

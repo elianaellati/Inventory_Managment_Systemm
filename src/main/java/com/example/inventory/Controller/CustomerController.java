@@ -36,7 +36,7 @@ public class CustomerController {
         return customerService.deleteCustomerById(id);
     }
     @PutMapping("/{id}")
-    public CustomerDto updateCustomer(@PathVariable Long id,@RequestBody Customer updatedCustomer){
+    public CustomerDto updateCustomer(@PathVariable Long id,@RequestBody CustomerDto updatedCustomer){
         return customerService.updateCustomerById(id,updatedCustomer);
     }
     @PostMapping("/{id}/orders")
