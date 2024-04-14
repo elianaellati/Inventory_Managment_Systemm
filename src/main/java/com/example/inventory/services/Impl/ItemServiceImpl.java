@@ -40,7 +40,8 @@ public class ItemServiceImpl implements ItemService {
         return ItemMapper.mapToDTO(itemByid);
     }
     public ResponseEntity<?> deleteAnItem(long id) {
-        itemRepository.deleteById(id);
+        Item itemByid  = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
+        itemRepository.delete(itemByid);
         return ResponseEntity.ok("Successfully deleted");
     }
     public List<OrderDto>  retrieveOrdersForItem(Long id){

@@ -48,7 +48,8 @@ public class OrderServiceImpl implements OrderService {
         return OrderMapper.mapToDTO(OrderById);
     }
     public ResponseEntity<?> deleteOrderBy(long id) {
-        orderRepository.deleteById(id);
+        Order OrderById = orderRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
+        orderRepository.delete(OrderById);
         return ResponseEntity.ok("Successfully deleted");
     }
 
