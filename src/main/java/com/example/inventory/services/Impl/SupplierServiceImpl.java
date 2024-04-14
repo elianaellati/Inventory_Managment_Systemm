@@ -43,15 +43,17 @@ public class SupplierServiceImpl implements SupplierService {
         return SupplierMapper.mapToDTO(supplierByid);
     }
     public ResponseEntity<?> deleteAnSupplier(long id) {
-        supplierRepository.deleteById(id);
+        Supplier supplierByid  = supplierRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
+        supplierRepository.delete(supplierByid);
         return ResponseEntity.ok("Successfully deleted");
     }
     public SupplierDto updateSupplier(SupplierDto supplier,long id) {
         Supplier supplierToUpdate=supplierRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
-        if(supplierToUpdate!=null){
+
             SupplierMapper.update(supplierToUpdate,supplier);
-            supplierRepository.save(supplierToUpdate);
-        }
+
+
+        supplierRepository.save(supplierToUpdate);
         return SupplierMapper.mapToDTO(supplierToUpdate);
     }
     public ResponseEntity<?> saveItemsForSupplier(ItemDto item,Long id){

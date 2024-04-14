@@ -13,7 +13,7 @@ public interface CustomerService {
     CustomerDto findCustomerById(long id);
     CustomerDto updateCustomerById(long id,CustomerDto requestedCustomer);
     ResponseEntity<?> deleteCustomerById(long id);
-    OrderDto addOrderForSpecificCustomer(Long id, OrderDto orderRequest);
+     ResponseEntity<?> addOrderForSpecificCustomer(Long id, OrderDto orderRequest);
     List<OrderDto> retrieveOrderForSpecificCustomer(Long id);
 
 }

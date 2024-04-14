@@ -55,12 +55,12 @@ public class CustomerServiceImpl implements CustomerService {
         return CustomerMapper.mapToDTO(customerById);
     }
 
-    public OrderDto addOrderForSpecificCustomer(Long id,OrderDto orderRequest) {
+    public ResponseEntity<?> addOrderForSpecificCustomer(Long id,OrderDto orderRequest) {
         Customer customerById = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));
             Order orderToAdd= OrderMapper.toEntity(orderRequest,customerById);
             customerById.getOrderlist().add(orderToAdd);
             customerRepository.save(customerById);
-        return OrderMapper.mapToDTO(orderToAdd);
+        return ResponseEntity.ok("successfully added");
     }
     public List<OrderDto> retrieveOrderForSpecificCustomer(Long id) {
         Customer customerById = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFound(id));

@@ -40,7 +40,7 @@ public class CustomerController {
         return customerService.updateCustomerById(id,updatedCustomer);
     }
     @PostMapping("/{id}/orders")
-    public OrderDto addOrderForSpecificCustomer(@PathVariable Long id, @RequestBody OrderDto orderRequest){
+    public ResponseEntity<?> addOrderForSpecificCustomer(@PathVariable Long id, @RequestBody OrderDto orderRequest){
         return customerService.addOrderForSpecificCustomer(id,orderRequest);
     }
     @GetMapping("/{id}/orders")
