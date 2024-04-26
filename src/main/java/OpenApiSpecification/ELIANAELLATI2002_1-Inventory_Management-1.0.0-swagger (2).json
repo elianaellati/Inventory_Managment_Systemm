@@ -521,41 +521,6 @@
         }
       }
     },
-    "/orders/date/{Date}" : {
-      "get" : {
-        "tags" : [ "Orders" ],
-        "summary" : "Finds order by specific date",
-        "operationId" : "retrieveOrdersBySpecificDate",
-        "parameters" : [ {
-          "name" : "Date",
-          "in" : "path",
-          "description" : "Dates values that need to be considered for filter",
-          "required" : true,
-          "schema" : {
-            "type" : "string",
-            "format" : "date"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Order"
-                  }
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Invalid status value"
-          }
-        }
-      }
-    },
     "/items" : {
       "get" : {
         "tags" : [ "Items" ],
@@ -978,7 +943,8 @@
             "items" : {
               "$ref" : "#/components/schemas/Order"
             },
-            "description" : "List of orders associated with the customer"
+            "description" : "List of orders associated with the customer",
+            "default": []
           }
         },
         "required" : [ "name", "email", "phone_number" ]
