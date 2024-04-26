@@ -54,7 +54,7 @@ Supplier Resource
 #
 # OpenAPI Specififcation:
 https://app.swaggerhub.com/apis/ELIANAELLATI2002_1/Inventory_Management/1.0.0#/
-
+**Note If does Not Open with you because it expired, you will find it at OpenApiSpecification package.
 
 
  
