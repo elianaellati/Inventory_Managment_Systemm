@@ -1,0 +1,1340 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Inventory_Management_System",
+    "description": "Its an API which allows customers to order several items",
+    "contact": {
+      "name": "Eliana Ellati"
+    }
+  },
+  "tags": [
+    {
+      "name": "Customers",
+      "description": "Everything about your Customers"
+    },
+    {
+      "name": "Orders",
+      "description": "Access to Customer orders"
+    },
+    {
+      "name": "Items",
+      "description": "description about the Items"
+    },
+    {
+      "name": "Suppliers",
+      "description": "Information about the suppliers we have"
+    }
+  ],
+  "paths": {
+    "/customers": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Retrieve all customers",
+        "responses": {
+          "200": {
+            "description": "A list of customers"
+          },
+          "404": {
+            "description": "No Customers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "format": "int64",
+                        "description": "Unique identifier for the customer"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "eliana ellati",
+                        "description": "Name of the customer"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "elianaellati@gmail.com",
+                        "format": "email",
+                        "description": "Email address of the customer"
+                      },
+                      "phone_number": {
+                        "type": "string",
+                        "example": "0568722660",
+                        "description": "phone number of the customer"
+                      },
+                      "orders": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1,
+                              "format": "int64",
+                              "description": "Unique identifier for the order"
+                            },
+                            "customerId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": 1,
+                              "description": "The ID for the Customer"
+                            },
+                            "OrderDate": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Date of the order"
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "Order Status",
+                              "example": "pending",
+                              "enum": [
+                                "pending",
+                                "approved",
+                                "delivered",
+                                "canceled"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "OrderDate",
+                            "status"
+                          ]
+                        },
+                        "description": "List of orders associated with the customer"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "email",
+                      "phone_number",
+                      "orders"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Save a new customer",
+        "operationId": "addCustomer",
+        "requestBody": {
+          "description": "Create a new Customer",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1,
+                    "format": "int64",
+                    "description": "Unique identifier for the customer"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "eliana ellati",
+                    "description": "Name of the customer"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "elianaellati@gmail.com",
+                    "format": "email",
+                    "description": "Email address of the customer"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "example": "0568722660",
+                    "description": "phone number of the customer"
+                  },
+                  "orders": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1,
+                          "format": "int64",
+                          "description": "Unique identifier for the order"
+                        },
+                        "customerId": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 1,
+                          "description": "The ID for the Customer"
+                        },
+                        "OrderDate": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Date of the order"
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Order Status",
+                          "example": "pending",
+                          "enum": [
+                            "pending",
+                            "approved",
+                            "delivered",
+                            "canceled"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "OrderDate",
+                        "status"
+                      ]
+                    },
+                    "description": "List of orders associated with the customer"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "phone_number",
+                  "orders"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "created Successfully"
+          },
+          "405": {
+            "description": "Invalid Input"
+          }
+        }
+      }
+    },
+    "/customers/{Id}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Retrieve a specific customer by Id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            },
+            "description": "ID of the customer to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SuccessfullyRetrieved"
+          },
+          "404": {
+            "description": "Cannot find",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1,
+                      "format": "int64",
+                      "description": "Unique identifier for the customer"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "eliana ellati",
+                      "description": "Name of the customer"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "elianaellati@gmail.com",
+                      "format": "email",
+                      "description": "Email address of the customer"
+                    },
+                    "phone_number": {
+                      "type": "string",
+                      "example": "0568722660",
+                      "description": "phone number of the customer"
+                    },
+                    "orders": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1,
+                            "format": "int64",
+                            "description": "Unique identifier for the order"
+                          },
+                          "customerId": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1,
+                            "description": "The ID for the Customer"
+                          },
+                          "OrderDate": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Date of the order"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Order Status",
+                            "example": "pending",
+                            "enum": [
+                              "pending",
+                              "approved",
+                              "delivered",
+                              "canceled"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "OrderDate",
+                          "status"
+                        ]
+                      },
+                      "description": "List of orders associated with the customer"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "email",
+                    "phone_number",
+                    "orders"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Delete a customer",
+        "operationId": "deleteCustomer",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            },
+            "description": "ID of the customer to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Deleted"
+          },
+          "400": {
+            "description": "Invalid  value"
+          },
+          "404": {
+            "description": "Cannot Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Update a customer",
+        "operationId": "updateCustomer",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            },
+            "description": "ID of the customer to be updated"
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent customer",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1,
+                    "format": "int64",
+                    "description": "Unique identifier for the customer"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "eliana ellati",
+                    "description": "Name of the customer"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "elianaellati@gmail.com",
+                    "format": "email",
+                    "description": "Email address of the customer"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "example": "0568722660",
+                    "description": "phone number of the customer"
+                  },
+                  "orders": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1,
+                          "format": "int64",
+                          "description": "Unique identifier for the order"
+                        },
+                        "customerId": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 1,
+                          "description": "The ID for the Customer"
+                        },
+                        "OrderDate": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Date of the order"
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Order Status",
+                          "example": "pending",
+                          "enum": [
+                            "pending",
+                            "approved",
+                            "delivered",
+                            "canceled"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "OrderDate",
+                        "status"
+                      ]
+                    },
+                    "description": "List of orders associated with the customer"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "phone_number",
+                  "orders"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated"
+          },
+          "400": {
+            "description": "Invalid  value"
+          },
+          "404": {
+            "description": "Cannot Found"
+          }
+        }
+      }
+    },
+    "/customers/{id}/orders": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Add orders for a specific customer",
+        "operationId": "addOrdersForCustomer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the customer for whom orders are to be added",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1,
+                      "format": "int64",
+                      "description": "Unique identifier for the order"
+                    },
+                    "customerId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 1,
+                      "description": "The ID for the Customer"
+                    },
+                    "OrderDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Date of the order"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Order Status",
+                      "example": "pending",
+                      "enum": [
+                        "pending",
+                        "approved",
+                        "delivered",
+                        "canceled"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "OrderDate",
+                    "status"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Orders added successfully for the specified customer"
+          },
+          "400": {
+            "description": "Bad request. Check request body for errors."
+          },
+          "404": {
+            "description": "Customer not found. Unable to add orders."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Retrieve orders for a specific customer",
+        "operationId": "getOrdersForACustomer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the customer whose orders are to be retrieved",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of orders for the specified customer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "format": "int64",
+                        "description": "Unique identifier for the order"
+                      },
+                      "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1,
+                        "description": "The ID for the Customer"
+                      },
+                      "OrderDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date of the order"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Order Status",
+                        "example": "pending",
+                        "enum": [
+                          "pending",
+                          "approved",
+                          "delivered",
+                          "canceled"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "OrderDate",
+                      "status"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found or no orders found for the customer"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Retrieve all orders",
+        "responses": {
+          "200": {
+            "description": "A list of customers"
+          },
+          "404": {
+            "description": "No orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "format": "int64",
+                        "description": "Unique identifier for the order"
+                      },
+                      "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1,
+                        "description": "The ID for the Customer"
+                      },
+                      "OrderDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date of the order"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Order Status",
+                        "example": "pending",
+                        "enum": [
+                          "pending",
+                          "approved",
+                          "delivered",
+                          "canceled"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "OrderDate",
+                      "status"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "delete": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Delete an order",
+        "operationId": "deleteOrder",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            },
+            "description": "ID of the customer to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Deleted"
+          },
+          "400": {
+            "description": "Invalid  value"
+          },
+          "404": {
+            "description": "Cannot Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Update an order",
+        "operationId": "updateAnOrder",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            },
+            "description": "ID of the order to be updated"
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent order",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1,
+                    "format": "int64",
+                    "description": "Unique identifier for the order"
+                  },
+                  "customerId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 1,
+                    "description": "The ID for the Customer"
+                  },
+                  "OrderDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Date of the order"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Order Status",
+                    "example": "pending",
+                    "enum": [
+                      "pending",
+                      "approved",
+                      "delivered",
+                      "canceled"
+                    ]
+                  }
+                },
+                "required": [
+                  "OrderDate",
+                  "status"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated"
+          },
+          "400": {
+            "description": "Invalid  value"
+          },
+          "404": {
+            "description": "Cannot Found"
+          }
+        }
+      }
+    },
+    "/orders/status/{status}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Finds order by specific status",
+        "operationId": "findOrdersBySpecificStatus",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "available",
+              "enum": [
+                "pending",
+                "approved",
+                "delivered"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "format": "int64",
+                        "description": "Unique identifier for the order"
+                      },
+                      "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1,
+                        "description": "The ID for the Customer"
+                      },
+                      "OrderDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date of the order"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Order Status",
+                        "example": "pending",
+                        "enum": [
+                          "pending",
+                          "approved",
+                          "delivered",
+                          "canceled"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "OrderDate",
+                      "status"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/orders/date/{Date}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Finds order by specific date",
+        "operationId": "findOrdersBySpecificDate",
+        "parameters": [
+          {
+            "name": "Date",
+            "in": "path",
+            "description": "Dates values that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "format": "int64",
+                        "description": "Unique identifier for the order"
+                      },
+                      "customerId": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1,
+                        "description": "The ID for the Customer"
+                      },
+                      "OrderDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date of the order"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Order Status",
+                        "example": "pending",
+                        "enum": [
+                          "pending",
+                          "approved",
+                          "delivered",
+                          "canceled"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "OrderDate",
+                      "status"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/items": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Retrieve all items",
+        "responses": {
+          "200": {
+            "description": "A list of items"
+          },
+          "404": {
+            "description": "No items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "format": "int64",
+                        "description": "Unique identifier for the item"
+                      },
+                      "itemName": {
+                        "type": "string",
+                        "description": "The Name of the item",
+                        "example": "Snikers"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "format": "double",
+                        "example": 10,
+                        "description": "Quantity of the item"
+                      },
+                      "price": {
+                        "type": "number",
+                        "format": "double",
+                        "example": 20.5,
+                        "description": "price of the item"
+                      }
+                    },
+                    "required": [
+                      "itemName",
+                      "Quantity",
+                      "price"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Save new Items",
+        "operationId": "addItem",
+        "requestBody": {
+          "description": "Create a new Item",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1,
+                    "format": "int64",
+                    "description": "Unique identifier for the item"
+                  },
+                  "itemName": {
+                    "type": "string",
+                    "description": "The Name of the item",
+                    "example": "Snikers"
+                  },
+                  "quantity": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 10,
+                    "description": "Quantity of the item"
+                  },
+                  "price": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 20.5,
+                    "description": "price of the item"
+                  }
+                },
+                "required": [
+                  "itemName",
+                  "Quantity",
+                  "price"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "created Successfully"
+          },
+          "405": {
+            "description": "Invalid Input"
+          }
+        }
+      }
+    },
+    "/items/{id}": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Retrieve a specific item by Id",
+        "operationId": "findItemById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            },
+            "description": "ID of the Item to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Retrieved"
+          },
+          "400": {
+            "description": "Invalid  value"
+          },
+          "404": {
+            "description": "Cannot Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Delete an item",
+        "operationId": "deleteAnItem",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            },
+            "description": "ID of the Item to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Deleted"
+          },
+          "400": {
+            "description": "Invalid  value"
+          },
+          "404": {
+            "description": "Cannot Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Update an item",
+        "operationId": "updateItem",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "example": 1
+            },
+            "description": "ID of the Item to be updated"
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent item",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1,
+                    "format": "int64",
+                    "description": "Unique identifier for the item"
+                  },
+                  "itemName": {
+                    "type": "string",
+                    "description": "The Name of the item",
+                    "example": "Snikers"
+                  },
+                  "quantity": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 10,
+                    "description": "Quantity of the item"
+                  },
+                  "price": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 20.5,
+                    "description": "price of the item"
+                  }
+                },
+                "required": [
+                  "itemName",
+                  "Quantity",
+                  "price"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated"
+          },
+          "400": {
+            "description": "Invalid  value"
+          },
+          "404": {
+            "description": "Cannot Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1,
+            "format": "int64",
+            "description": "Unique identifier for the customer"
+          },
+          "name": {
+            "type": "string",
+            "example": "eliana ellati",
+            "description": "Name of the customer"
+          },
+          "email": {
+            "type": "string",
+            "example": "elianaellati@gmail.com",
+            "format": "email",
+            "description": "Email address of the customer"
+          },
+          "phone_number": {
+            "type": "string",
+            "example": "0568722660",
+            "description": "phone number of the customer"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1,
+                  "format": "int64",
+                  "description": "Unique identifier for the order"
+                },
+                "customerId": {
+                  "type": "integer",
+                  "format": "int64",
+                  "example": 1,
+                  "description": "The ID for the Customer"
+                },
+                "OrderDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Date of the order"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "Order Status",
+                  "example": "pending",
+                  "enum": [
+                    "pending",
+                    "approved",
+                    "delivered",
+                    "canceled"
+                  ]
+                }
+              },
+              "required": [
+                "OrderDate",
+                "status"
+              ]
+            },
+            "description": "List of orders associated with the customer"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "phone_number",
+          "orders"
+        ]
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1,
+            "format": "int64",
+            "description": "Unique identifier for the order"
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1,
+            "description": "The ID for the Customer"
+          },
+          "OrderDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the order"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order Status",
+            "example": "pending",
+            "enum": [
+              "pending",
+              "approved",
+              "delivered",
+              "canceled"
+            ]
+          }
+        },
+        "required": [
+          "OrderDate",
+          "status"
+        ]
+      },
+      "Items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1,
+            "format": "int64",
+            "description": "Unique identifier for the item"
+          },
+          "itemName": {
+            "type": "string",
+            "description": "The Name of the item",
+            "example": "Snikers"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double",
+            "example": 10,
+            "description": "Quantity of the item"
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "example": 20.5,
+            "description": "price of the item"
+          }
+        },
+        "required": [
+          "itemName",
+          "Quantity",
+          "price"
+        ]
+      }
+    }
+  }
+}
